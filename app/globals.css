@@ -1,0 +1,229 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #07060d;
+  --gold: #f5c451;
+  --amber: #ff9f1c;
+}
+
+html {
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100dvh;
+  overflow-x: hidden;
+  background: var(--ink);
+  color: #fff4dc;
+  font-family: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60% 45% at 50% 100%, rgba(255, 120, 30, 0.22), transparent 70%),
+    radial-gradient(50% 40% at 85% 0%, rgba(80, 60, 200, 0.16), transparent 70%),
+    radial-gradient(50% 40% at 10% 10%, rgba(245, 196, 81, 0.08), transparent 70%),
+    linear-gradient(180deg, #0a0d24 0%, #07060d 70%);
+}
+
+::selection {
+  background: rgba(245, 196, 81, 0.35);
+}
+
+.font-display {
+  font-family: "Yatra One", Georgia, "Times New Roman", serif;
+  font-weight: 400;
+}
+
+@layer components {
+  .glass {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.025));
+    border: 1px solid rgba(245, 196, 81, 0.22);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    box-shadow:
+      0 20px 60px -20px rgba(0, 0, 0, 0.7),
+      0 0 40px -10px rgba(255, 150, 40, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .gold-text {
+    background-image: linear-gradient(100deg, #fff1c1 0%, #f5c451 30%, #ff9f1c 55%, #ffe29a 80%, #fff1c1 100%);
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: shimmer 7s linear infinite;
+  }
+
+  .btn {
+    display: inline-flex;
+    min-height: 54px;
+    width: 100%;
+    cursor: pointer;
+    user-select: none;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 1rem;
+    padding: 0.75rem 1.1rem;
+    font-size: 14.5px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    touch-action: manipulation;
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
+  .btn:focus-visible {
+    outline: 2px solid rgba(255, 226, 154, 0.9);
+    outline-offset: 3px;
+  }
+  .btn:disabled {
+    cursor: default;
+  }
+
+  .btn-gold {
+    color: #2a1200;
+    background: linear-gradient(135deg, #ffe9a8 0%, #f7b733 55%, #ff8a1f 100%);
+    box-shadow: 0 10px 30px -8px rgba(255, 150, 30, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  .btn-glass {
+    color: #ffe9b8;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(245, 196, 81, 0.28);
+  }
+
+  .btn-active {
+    border-color: rgba(255, 226, 154, 0.9);
+    background: rgba(245, 196, 81, 0.16);
+    box-shadow: 0 0 24px -6px rgba(255, 170, 50, 0.6);
+  }
+
+  .btn-wa {
+    color: #032a14;
+    background: linear-gradient(135deg, #5df08f, #25d366);
+    box-shadow: 0 10px 28px -10px rgba(37, 211, 102, 0.7);
+  }
+
+  @media (hover: hover) {
+    .btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+    }
+    .btn-gold:hover:not(:disabled) {
+      box-shadow: 0 16px 38px -8px rgba(255, 150, 30, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    }
+    .btn-glass:hover:not(:disabled) {
+      background: rgba(245, 196, 81, 0.14);
+      border-color: rgba(255, 226, 154, 0.7);
+    }
+  }
+
+  /* ---------- Diya ---------- */
+  .diya {
+    position: relative;
+    width: var(--s);
+    height: calc(var(--s) * 0.46);
+    flex: none;
+  }
+  .diya-glow {
+    position: absolute;
+    left: 50%;
+    bottom: calc(var(--s) * 0.26);
+    width: calc(var(--s) * 2.8);
+    aspect-ratio: 1;
+    translate: -50% 50%;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(255, 175, 55, 0.5), rgba(255, 120, 30, 0.16) 40%, transparent 70%);
+    opacity: 0.55;
+    transition: opacity 0.8s ease;
+    animation: glow 2.6s ease-in-out infinite var(--d, 0s);
+    pointer-events: none;
+  }
+  .diya-bright .diya-glow {
+    opacity: 1;
+  }
+  .diya-flame {
+    position: absolute;
+    left: 50%;
+    bottom: calc(var(--s) * 0.3);
+    width: calc(var(--s) * 0.2);
+    height: calc(var(--s) * 0.36);
+    translate: -50% 0;
+    transform-origin: 50% 100%;
+    border-radius: 50% 50% 50% 50% / 72% 72% 28% 28%;
+    background: radial-gradient(ellipse at 50% 78%, #fffbe0 0%, #ffd66b 34%, #ff8a1f 72%, rgba(255, 90, 20, 0) 100%);
+    box-shadow: 0 0 calc(var(--s) * 0.25) calc(var(--s) * 0.06) rgba(255, 160, 40, 0.55);
+    animation: flicker 1.4s ease-in-out infinite var(--d, 0s);
+  }
+  .diya-bowl {
+    position: absolute;
+    inset: auto 0 0 0;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.5));
+  }
+
+  /* ---------- Embers ---------- */
+  .ember {
+    position: absolute;
+    bottom: -12px;
+    border-radius: 9999px;
+    background: radial-gradient(circle, #ffe9a8 0%, #ff9f1c 55%, transparent 75%);
+    opacity: 0;
+    animation: rise var(--dur) linear infinite var(--delay);
+    will-change: transform, opacity;
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -220% center;
+  }
+}
+
+@keyframes flicker {
+  0%, 100% { transform: scale(1, 1) rotate(-1.5deg); }
+  18% { transform: scale(0.94, 1.1) rotate(1.5deg); }
+  36% { transform: scale(1.04, 0.94) rotate(-2deg); }
+  54% { transform: scale(0.96, 1.08) rotate(2deg); }
+  76% { transform: scale(1.02, 0.97) rotate(-1deg); }
+}
+
+@keyframes glow {
+  0%, 100% { scale: 0.94; }
+  50% { scale: 1.08; }
+}
+
+@keyframes rise {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  10% { opacity: 0.9; }
+  100% { transform: translate3d(var(--dx), -108vh, 0); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .ember {
+    display: none;
+  }
+}
